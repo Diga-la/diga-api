@@ -20,7 +20,7 @@ class CreateServicesTable extends Migration
             $table->string('title');
             $table->unsignedBigInteger('user_id');
             $table->longText('description');
-            $table->double('price_base');
+            $table->double('price');
             $table->date('initial_period')->nullable();
             $table->date('final_period')->nullable();
             $table->timestamps();

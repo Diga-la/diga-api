@@ -16,19 +16,17 @@ class CreateOrderServicesTable extends Migration
         Schema::create('order_services', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-
-            $table->unsignedBigInteger('user_client_id');
+            $table->unsignedBigInteger('user_customer_id');
             $table->unsignedBigInteger('user_worker_id');
             $table->unsignedBigInteger('service_id');
-            $table->enum('status', ['await', 'received', 'payment_expired', 'work_in_progress', 'work_late', 'work_expired', 'work_completed', 'canceled','worker_received']);
+            $table->enum('status', ['await', 'received', 'payment_expired', 'working', 'work_late', 'work_expired', 'work_completed', 'canceled','worker_received']);
             $table->string('negociation_indetify'); //?
             $table->string('payment_identify');
-            $table->string('categorie_id');
             $table->double('price');
 
             $table->timestamps();
 
-            $table->foreign('user_client_id')
+            $table->foreign('user_customer_id')
             ->references('id')
             ->on('users')
             ->onDelete('cascade');
@@ -40,7 +38,7 @@ class CreateOrderServicesTable extends Migration
 
             $table->foreign('service_id')
             ->references('id')
-            ->on('service')
+            ->on('services')
             ->onDelete('cascade');
         });
     }
